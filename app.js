@@ -1,12 +1,14 @@
 'use strict';
 console.log('link workin bruvvvvvvv');
-
+var displayImageOne, displayImageTwo, displayImageThree;
 var buttonOne = document.getElementById('buttonOne');
 var buttonTwo = document.getElementById('buttonTwo');
 var buttonThree = document.getElementById('buttonThree');
 var imgPlaceholderOne = document.getElementById('firstImage');
 var imgPlaceholderTwo = document.getElementById('secondImage');
 var imgPlaceholderThree = document.getElementById('thirdImage');
+allMerchImages.imgCheck = [];
+allMerchImages.totalVotes = 0;
 
 function MerchImage(name, url) {
   this.name = name,
@@ -38,18 +40,13 @@ var allMerchImages = [
   new MerchImage('Wine Glass', 'img/wine-glass.jpg')
 ];
 
-var displayImageOne = MerchImage[0];
-var displayImageTwo = MerchImage[1];
-var displayImageThree = MerchImage[2];
-
-
 
 function newImageSet () {
-  displayImageOne = [Math.floor(Math.random() * allMerchImages.length)];
+  displayImageOne = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
   imgPlaceholderOne.src = displayImageOne.url;
-  displayImageTwo = [Math.floor(Math.random() * allMerchImages.length)];
+  displayImageTwo = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
   imgPlaceholderTwo.src = displayImageTwo.url;
-  displayImageThree = [Math.floor(Math.random() * allMerchImages.length)];
+  displayImageThree = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
   imgPlaceholderThree.src = displayImageThree.url;
 }
 
