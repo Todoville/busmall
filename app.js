@@ -1,20 +1,26 @@
 'use strict';
-console.log('link workin bruvvvvvvv');
-var displayImageOne, displayImageTwo, displayImageThree;
+//
+
 var buttonOne = document.getElementById('buttonOne');
 var buttonTwo = document.getElementById('buttonTwo');
 var buttonThree = document.getElementById('buttonThree');
-var imgPlaceholderOne = document.getElementById('firstImage');
-var imgPlaceholderTwo = document.getElementById('secondImage');
-var imgPlaceholderThree = document.getElementById('thirdImage');
-allMerchImages.imgCheck = [];
-allMerchImages.totalVotes = 0;
+
+//pics in html
+MerchImage.imgPlaceholderOne = document.getElementById('firstImage');
+MerchImage.imgPlaceholderTwo = document.getElementById('secondImage');
+MerchImage.imgPlaceholderThree = document.getElementById('thirdImage');
+
+//global variables for functions
+var displayImageOne, displayImageTwo, displayImageThree;
+MerchImage.imgCheck = [];
+MerchImage.totalVotes = 0;
 
 function MerchImage(name, url) {
   this.name = name,
   this.url = url,
   this.timesShown = 0,
   this.clicks = 0;
+  this.percentShown = 0;
 }
 
 var allMerchImages = [
@@ -25,7 +31,7 @@ var allMerchImages = [
   new MerchImage('Breakfast', 'img/bathroom.jpg'),
   new MerchImage('Bubblegum', 'img/bubblegum.jpg'),
   new MerchImage('chair', 'img/chair.jpg'),
-  new MerchImage('Cthulu', 'img/cthulu.jpg'),
+  new MerchImage('Cthulhu', 'img/cthulhu.jpg'),
   new MerchImage('Dog Duck', 'img/dog-duck.jpg'),
   new MerchImage('Dragon', 'img/dragon.jpg'),
   new MerchImage('Pen', 'img/pen.jpg'),
@@ -40,30 +46,46 @@ var allMerchImages = [
   new MerchImage('Wine Glass', 'img/wine-glass.jpg')
 ];
 
+MerchImage.prototype.percentCalc = function () {
+  var ratio = (this.click / this.timesShown);
+  this.percentShown = Math.round(ratio * 100);
+
+};
 
 function newImageSet () {
   displayImageOne = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
-  imgPlaceholderOne.src = displayImageOne.url;
+  MerchImage.imgPlaceholderOne.src = displayImageOne.url;
   displayImageTwo = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
-  imgPlaceholderTwo.src = displayImageTwo.url;
+  MerchImage.imgPlaceholderTwo.src = displayImageTwo.url;
   displayImageThree = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
-  imgPlaceholderThree.src = displayImageThree.url;
+  MerchImage.imgPlaceholderThree.src = displayImageThree.url;
 }
 
 buttonOne.addEventListener('click', function(e) {
   displayImageOne++;
+  MerchImage.totalVotes++;
   newImageSet();
 
 
 });
 buttonTwo.addEventListener('click', function(e) {
   displayImageTwo++;
+  MerchImage.totalVotes++;
   newImageSet();
 
 
 });
 buttonThree.addEventListener('click', function(e) {
   displayImageThree++;
+  MerchImage.totalVotes++;
   newImageSet();
 
 });
+
+if(allMerchImages.totalVotes === 2) {
+  buttonOne.removeEventListener('click', function (e) {});
+  buttonTwo.removeEventListener('click', function (e) {});
+  buttonThree.removeEventListener('click', function(e) {});
+}
+
+newImageSet();
