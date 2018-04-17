@@ -4,11 +4,9 @@ console.log('link workin bruvvvvvvv');
 var buttonOne = document.getElementById('buttonOne');
 var buttonTwo = document.getElementById('buttonTwo');
 var buttonThree = document.getElementById('buttonThree');
-
-buttonOne.addEventListener('click', function(e) {
-  this.clicks++;
-
-})
+var imgPlaceholderOne = document.getElementById('firstImage');
+var imgPlaceholderTwo = document.getElementById('secondImage');
+var imgPlaceholderThree = document.getElementById('thirdImage');
 
 function MerchImage(name, url) {
   this.name = name,
@@ -43,3 +41,32 @@ var allMerchImages = [
 var displayImageOne = MerchImage[0];
 var displayImageTwo = MerchImage[1];
 var displayImageThree = MerchImage[2];
+
+
+
+function newImageSet () {
+  displayImageOne = [Math.floor(Math.random()*allMerchImages.length)];
+  imgPlaceholderOne.src = displayImageOne.url;
+  displayImageTwo = [Math.floor(Math.random()*allMerchImages.length)];
+  imgPlaceholderTwo.src = displayImageTwo.url;
+  displayImageThree = [Math.floor(Math.random()*allMerchImages.length)];
+  imgPlaceholderThree.src = displayImageThree.url;
+}
+
+buttonOne.addEventListener('click', function(e) {
+  displayImageOne++;
+  newImageSet();
+
+
+});
+buttonTwo.addEventListener('click', function(e) {
+  displayImageTwo++;
+  newImageSet();
+
+
+});
+buttonThree.addEventListener('click', function(e) {
+  displayImageThree++;
+  newImageSet();
+
+});
