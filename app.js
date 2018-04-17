@@ -45,11 +45,11 @@ var displayImageThree = MerchImage[2];
 
 
 function newImageSet () {
-  displayImageOne = [Math.floor(Math.random()*allMerchImages.length)];
+  displayImageOne = [Math.floor(Math.random() * allMerchImages.length)];
   imgPlaceholderOne.src = displayImageOne.url;
-  displayImageTwo = [Math.floor(Math.random()*allMerchImages.length)];
+  displayImageTwo = [Math.floor(Math.random() * allMerchImages.length)];
   imgPlaceholderTwo.src = displayImageTwo.url;
-  displayImageThree = [Math.floor(Math.random()*allMerchImages.length)];
+  displayImageThree = [Math.floor(Math.random() * allMerchImages.length)];
   imgPlaceholderThree.src = displayImageThree.url;
 }
 
