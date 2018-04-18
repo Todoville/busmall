@@ -11,8 +11,8 @@ MerchImage.imgPlaceholderTwo = document.getElementById('secondImage');
 MerchImage.imgPlaceholderThree = document.getElementById('thirdImage');
 
 //global variables for functions
-var displayImageOne, displayImageTwo, displayImageThree;
-MerchImage.imgCheck = [];
+MerchImage.currentlyDisplayed = [];
+MerchImage.lastDisplayed = [];
 MerchImage.totalVotes = 0;
 
 function MerchImage(name, url) {
@@ -24,9 +24,9 @@ function MerchImage(name, url) {
 }
 
 var allMerchImages = [
-  new MerchImage('bag', 'img/bag.jpg'),
-  new MerchImage('banana', 'img/banana.jpg'),
-  new MerchImage('bathroom', 'img/bathroom.jpg'),
+  new MerchImage('Bag', 'img/bag.jpg'),
+  new MerchImage('Banana', 'img/banana.jpg'),
+  new MerchImage('Bathroom', 'img/bathroom.jpg'),
   new MerchImage('Boots', 'img/boots.jpg'),
   new MerchImage('Breakfast', 'img/bathroom.jpg'),
   new MerchImage('Bubblegum', 'img/bubblegum.jpg'),
@@ -52,33 +52,41 @@ MerchImage.prototype.percentCalc = function () {
 
 };
 
-function newImageSet () {
-  displayImageOne = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
-  MerchImage.imgPlaceholderOne.src = displayImageOne.url;
-  displayImageTwo = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
-  MerchImage.imgPlaceholderTwo.src = displayImageTwo.url;
-  displayImageThree = allMerchImages[Math.floor(Math.random() * allMerchImages.length)];
-  MerchImage.imgPlaceholderThree.src = displayImageThree.url;
-}
+MerchImage.newImageSet = function () {
+  var uniqueImgArr = [];
+
+  while(uniqueImgArr.length < 3) {
+    var randomImg = Math.floor(Math.random() * allMerchImages.length);
+    if(!MerchImage.lastDisplayed.includes(randomImg) && !uniqueImgArr.includes(randomImg)) {
+      uniqueImgArr.push(randomImg);
+    } else {
+      console.log('this array aint big enuff for the two of us');
+    }
+  }
+  MerchImage.lastDisplayed = uniqueImgArr;
+  return uniqueImgArr;
+};
+
+//the second image
+// MerchImage.imgPlaceholderOne.src = randomImg.url;
+// MerchImage.imgPlaceholderOne.alt = randomImg.name;
+
 
 buttonOne.addEventListener('click', function(e) {
-  displayImageOne++;
   MerchImage.totalVotes++;
-  newImageSet();
+  MerchImage.newImageSet();
 
 
 });
 buttonTwo.addEventListener('click', function(e) {
-  displayImageTwo++;
   MerchImage.totalVotes++;
-  newImageSet();
+  MerchImage.newImageSet();
 
 
 });
 buttonThree.addEventListener('click', function(e) {
-  displayImageThree++;
   MerchImage.totalVotes++;
-  newImageSet();
+  MerchImage.newImageSet();
 
 });
 
@@ -88,4 +96,4 @@ if(allMerchImages.totalVotes === 2) {
   buttonThree.removeEventListener('click', function(e) {});
 }
 
-newImageSet();
+MerchImage.newImageSet();
