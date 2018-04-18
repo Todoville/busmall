@@ -14,6 +14,7 @@ MerchImage.imgPlaceholderThree = document.getElementById('thirdImage');
 MerchImage.currentlyDisplayed = [];
 MerchImage.lastDisplayed = [];
 MerchImage.totalVotes = 0;
+MerchImage.section = document.getElementById('section');
 
 function MerchImage(name, url) {
   this.name = name,
@@ -52,7 +53,7 @@ MerchImage.prototype.percentCalc = function () {
 
 };
 
-MerchImage.newImageSet = function () {
+MerchImage.uniqueImageSet = function () {
   var uniqueImgArr = [];
 
   while(uniqueImgArr.length < 3) {
@@ -67,26 +68,52 @@ MerchImage.newImageSet = function () {
   return uniqueImgArr;
 };
 
-//the second image
-// MerchImage.imgPlaceholderOne.src = randomImg.url;
-// MerchImage.imgPlaceholderOne.alt = randomImg.name;
+MerchImage.displayImages = function () {
+  var nestedArray = MerchImage.uniqueImageSet();
+
+  allMerchImages[nestedArray[0]].timesShown++;
+  allMerchImages[nestedArray[1]].timesShown++;
+  allMerchImages[nestedArray[2]].timesShown++;
+
+  MerchImage.imgPlaceholderOne.src = allMerchImages[nestedArray[0]].url;
+  MerchImage.imgPlaceholderOne.alt = allMerchImages[nestedArray[0]].name;
+  MerchImage.imgPlaceholderTwo.src = allMerchImages[nestedArray[1]].url;
+  MerchImage.imgPlaceholderTwo.alt = allMerchImages[nestedArray[1]].alt;
+  MerchImage.imgPlaceholderThree.src = allMerchImages[nestedArray[2]].url;
+  MerchImage.imgPlaceholderThree.alt = allMerchImages[nestedArray[2]].alt;
+};
+
+
+MerchImage.handleClick = function (event) {
+  MerchImage.totalVotes++;
+  if(MerchImage.totalVotes >24) {
+    MerchImage.section.removeEventListener('click', MerchImage.handleClick);
+  }
+  console.log(event.target.src);
+  for(var i in allMerchImages) {
+    if(event.target.src === allMerchImages[i]) {
+      allMerchImages[i].votes++;
+    }
+  }
+};
+
 
 
 buttonOne.addEventListener('click', function(e) {
   MerchImage.totalVotes++;
-  MerchImage.newImageSet();
+  MerchImage.uniqueImageSet();
 
 
 });
 buttonTwo.addEventListener('click', function(e) {
   MerchImage.totalVotes++;
-  MerchImage.newImageSet();
+  MerchImage.uniqueImageSet();
 
 
 });
 buttonThree.addEventListener('click', function(e) {
   MerchImage.totalVotes++;
-  MerchImage.newImageSet();
+  MerchImage.uniqueImageSet();
 
 });
 
@@ -96,4 +123,5 @@ if(allMerchImages.totalVotes === 2) {
   buttonThree.removeEventListener('click', function(e) {});
 }
 
-MerchImage.newImageSet();
+MerchImage.uniqueImageSet();
+MerchImage.displayImages();
