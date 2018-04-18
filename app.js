@@ -14,12 +14,14 @@ MerchImage.imgPlaceholderThree = document.getElementById('thirdImage');
 MerchImage.lastDisplayed = [];
 MerchImage.totalVotes = 0;
 MerchImage.section = document.getElementById('section');
+MerchImage.chartVotes = [];
+MerchImage.chartNames = [];
 
 function MerchImage(name, url) {
   this.name = name,
   this.url = url,
   this.timesShown = 0,
-  this.clicks = 0;
+  this.votes = 0;
   this.percentShown = 0;
 }
 
@@ -47,7 +49,7 @@ var allMerchImages = [
 ];
 
 MerchImage.prototype.percentCalc = function () {
-  var ratio = (this.click / this.timesShown);
+  var ratio = (this.votes / this.timesShown);
   this.percentShown = Math.round(ratio * 100);
 
 };
@@ -94,12 +96,16 @@ MerchImage.handleClick = function(event) {
       allMerchImages[i].votes++;
     }
   }
-  MerchImage.uniqueImageSet();
   MerchImage.displayImages();
 };
 
+MerchImage.VoteTotals = function () {
+  for(var i in allMerchImages) {
+    MerchImage.chartNames[i] = allMerchImages.name[i];
+    MerchImage.chartVotes[i] = allMerchImages.clicks[i];
+  }
+}
+
 MerchImage.section.addEventListener('click', MerchImage.handleClick);
 
-MerchImage.uniqueImageSet();
 MerchImage.displayImages();
-MerchImage.handleClick();
