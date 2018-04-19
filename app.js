@@ -93,7 +93,7 @@ MerchImage.displayImages = function () {
 
 MerchImage.handleClick = function(event) {
   MerchImage.totalVotes++;
-  if(MerchImage.totalVotes >4) {
+  if(MerchImage.totalVotes >24) {
     MerchImage.section.removeEventListener('click', MerchImage.handleClick);
     MerchImage.imgPlaceholderOne.style.display = 'none';
     MerchImage.imgPlaceholderTwo.style.display = 'none';
@@ -117,7 +117,7 @@ MerchImage.voteTotals = function () {
   for(var i in allMerchImages) {
     console.log(allMerchImages[i].name)
     MerchImage.chartNames[i] = allMerchImages[i].name;
-    MerchImage.chartVotes[i] = allMerchImages[i].clicks;
+    MerchImage.chartVotes[i] = allMerchImages[i].votes;
 
 
   }
