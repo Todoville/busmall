@@ -18,6 +18,7 @@ MerchImage.section = document.getElementById('section');
 MerchImage.chartVotes = [];
 MerchImage.chartNames = [];
 MerchImage.thanksHeader = document.getElementById('inputThanks');
+MerchImage.parsedArr = JSON.parse(localStorage.getItem('results'))
 
 function MerchImage(name, url) {
   this.name = name,
@@ -27,7 +28,7 @@ function MerchImage(name, url) {
   this.percentPicked= 0;
 }
 
-var allMerchImages = [
+var allMerchImages = MerchImage.parsedArr || [
   new MerchImage('Bag', 'img/bag.jpg'),
   new MerchImage('Banana', 'img/banana.jpg'),
   new MerchImage('Bathroom', 'img/bathroom.jpg'),
@@ -100,6 +101,8 @@ MerchImage.handleClick = function(event) {
     MerchImage.imgPlaceholderThree.style.display = 'none';
     var urDone = document.createTextNode('Thank you for your input!');
     MerchImage.thanksHeader.appendChild(urDone);
+    MerchImage.stringifiedArr = JSON.stringify(allMerchImages);
+    localStorage.setItem('results', MerchImage.stringifiedArr);
     percentCalc();
     MerchImage.voteTotals();
     MerchImage.renderChart();
