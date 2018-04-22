@@ -1,16 +1,6 @@
 'use strict';
 //
 
-var buttonOne = document.getElementById('buttonOne');
-var buttonTwo = document.getElementById('buttonTwo');
-var buttonThree = document.getElementById('buttonThree');
-
-//pics in html
-MerchImage.imgPlaceholderOne = document.getElementById('firstImage');
-MerchImage.imgPlaceholderTwo = document.getElementById('secondImage');
-MerchImage.imgPlaceholderThree = document.getElementById('thirdImage');
-
-
 //global variables for functions
 MerchImage.lastDisplayed = [];
 MerchImage.totalVotes = 0;
@@ -18,7 +8,7 @@ MerchImage.section = document.getElementById('section');
 MerchImage.chartVotes = [];
 MerchImage.chartNames = [];
 MerchImage.thanksHeader = document.getElementById('inputThanks');
-MerchImage.parsedArr = JSON.parse(localStorage.getItem('results'))
+MerchImage.parsedArr = JSON.parse(localStorage.getItem('results'));
 
 function MerchImage(name, url) {
   this.name = name,
@@ -63,6 +53,7 @@ MerchImage.uniqueImageSet = function () {
   var uniqueImgArr = [];
 
   while(uniqueImgArr.length < 3) {
+    debugger;
     var randomImg = Math.floor(Math.random() * allMerchImages.length);
     if(!MerchImage.lastDisplayed.includes(randomImg) && !uniqueImgArr.includes(randomImg)) {
       uniqueImgArr.push(randomImg);
@@ -118,7 +109,7 @@ MerchImage.handleClick = function(event) {
 
 MerchImage.voteTotals = function () {
   for(var i in allMerchImages) {
-    console.log(allMerchImages[i].name)
+    console.log(allMerchImages[i].name);
     MerchImage.chartNames[i] = allMerchImages[i].name;
     MerchImage.chartVotes[i] = allMerchImages[i].votes;
 
