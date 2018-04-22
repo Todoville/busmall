@@ -1,6 +1,16 @@
 'use strict';
 //
 
+var buttonOne = document.getElementById('buttonOne');
+var buttonTwo = document.getElementById('buttonTwo');
+var buttonThree = document.getElementById('buttonThree');
+
+//pics in html
+MerchImage.imgPlaceholderOne = document.getElementById('firstImage');
+MerchImage.imgPlaceholderTwo = document.getElementById('secondImage');
+MerchImage.imgPlaceholderThree = document.getElementById('thirdImage');
+
+
 //global variables for functions
 MerchImage.lastDisplayed = [];
 MerchImage.totalVotes = 0;
@@ -53,7 +63,6 @@ MerchImage.uniqueImageSet = function () {
   var uniqueImgArr = [];
 
   while(uniqueImgArr.length < 3) {
-    debugger;
     var randomImg = Math.floor(Math.random() * allMerchImages.length);
     if(!MerchImage.lastDisplayed.includes(randomImg) && !uniqueImgArr.includes(randomImg)) {
       uniqueImgArr.push(randomImg);
