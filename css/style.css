@@ -1,4 +1,45 @@
+body {
+  background-color: #ddd;
+  font-family: 'Patrick Hand', cursive;
+
+}
+nav {
+  background-color: #fff;
+}
+
 section img {
   height: 300px;
-  width: 300px; 
+  width: 300px;
+  border: 5px solid #000;
+  margin: 15px;
+  padding: 10px;
+
+}
+img:hover {
+  border-color: #bbb;
+  border-style: inset;
+}
+
+section {
+  background-color: #999;
+  text-align: center;
+}
+ul {
+  display: inline-block;
+
+}
+li {
+  display: inline-block;
+  margin: 15px;
+  line-height: 10px;
+  position: relative;
+  bottom: 40px;
+  font-size: 30px;
+
+}
+h2 {
+  background-color: #666;
+  font-size: 56px;
+  text-align: center;
+  
 }
