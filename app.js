@@ -1,10 +1,6 @@
 'use strict';
 //
 
-var buttonOne = document.getElementById('buttonOne');
-var buttonTwo = document.getElementById('buttonTwo');
-var buttonThree = document.getElementById('buttonThree');
-
 //pics in html
 MerchImage.imgPlaceholderOne = document.getElementById('firstImage');
 MerchImage.imgPlaceholderTwo = document.getElementById('secondImage');
@@ -19,6 +15,7 @@ MerchImage.chartVotes = [];
 MerchImage.chartNames = [];
 MerchImage.thanksHeader = document.getElementById('inputThanks');
 MerchImage.parsedArr = JSON.parse(localStorage.getItem('results'));
+
 
 function MerchImage(name, url) {
   this.name = name,
@@ -99,7 +96,7 @@ MerchImage.handleClick = function(event) {
     MerchImage.imgPlaceholderOne.style.display = 'none';
     MerchImage.imgPlaceholderTwo.style.display = 'none';
     MerchImage.imgPlaceholderThree.style.display = 'none';
-    var urDone = document.createTextNode('Thank you for your input!');
+    var urDone = document.createTextNode('Thank you for your input! Refresh the page to add more data.');
     MerchImage.thanksHeader.appendChild(urDone);
     MerchImage.stringifiedArr = JSON.stringify(allMerchImages);
     localStorage.setItem('results', MerchImage.stringifiedArr);
@@ -135,8 +132,8 @@ MerchImage.renderChart = function () {
       datasets: [{
         label: 'Total Votes Per Item',
         data: MerchImage.chartVotes,
-        backgroundColor: 'blue',
-        hoverBackgroundColor: 'red',
+        backgroundColor: 'Grey',
+        hoverBackgroundColor: 'Black',
       }]
     },
     options: {
@@ -144,6 +141,13 @@ MerchImage.renderChart = function () {
         yAxes: [{
           ticks: {
             beginAtZero: true
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            min: 0,
+            max: 30,
+            stepSize: 3
           }
         }]
       },
